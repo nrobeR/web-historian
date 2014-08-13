@@ -9,8 +9,8 @@ var routeMap = {
   '/': handler.handleRequest
 }
 
-var server = http.createServer(function(request,reponse){
-  var path = helpers.parseHelper(request).pathname;
+var server = http.createServer(function(request,response){
+  var path = helpers.parseUrl(request).pathname;
   console.log("path: " + path);
   if(routeMap[path]){
     routeMap[path](request,response);

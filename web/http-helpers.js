@@ -3,7 +3,7 @@ var fs = require('fs');
 var archive = require('../helpers/archive-helpers');
 var url = require('url');
 
-exports.parseHelper = function(request){
+exports.parseUrl = function(request){
   var parsedUrl = url.parse(request.url);
   return parsedUrl;
 }
@@ -19,6 +19,16 @@ exports.headers = headers = {
 exports.serveAssets = function(res, asset, callback) {
   // Write some code here that helps serve up your static files!
   // (Static files are things like html (yours or archived from others...), css, or anything that doesn't change often.)
+  fs.readFile(asset, function(err, data){
+    // console.log("fs fired");
+    console.log('read file:' + data);
+    if(err){
+      console.log(err);
+    } else {
+      callback(data);
+      // res.end(data)
+    }
+  });
 };
 
 

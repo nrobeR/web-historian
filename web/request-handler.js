@@ -6,7 +6,11 @@ var helpers = require('./http-helpers.js');
 var handleGet = function(request,response){
   response.writeHead(200,helpers.headers);
   console.log("get request");
-  response.end('<input');
+  var assetName = archive.paths.siteAssets + '/index.html';
+  // var assetName = archive.paths.siteAssets('/index.html');
+  helpers.serveAssets(response, assetName , function(data){
+    response.end(data);
+  });
 };
 
 var handlePost = function(request,response){
@@ -33,5 +37,5 @@ exports.handleRequest = function (req, res) {
   if(handleMap[method]){
     handleMap[method](req,res);
   }
-  res.end(archive.paths.list);
+  // res.end(archive.paths.list);
 };
