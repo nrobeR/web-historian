@@ -21,7 +21,9 @@ exports.initialize = function(pathsObj){
     exports.paths[type] = path;
   });
 };
-
+//site assests - Our Stuff
+//archived - Archives
+//list - list of keys/sites we have already
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 

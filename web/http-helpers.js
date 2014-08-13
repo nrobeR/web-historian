@@ -1,6 +1,12 @@
 var path = require('path');
 var fs = require('fs');
 var archive = require('../helpers/archive-helpers');
+var url = require('url');
+
+exports.parseHelper = function(request){
+  var parsedUrl = url.parse(request.url);
+  return parsedUrl;
+}
 
 exports.headers = headers = {
   "access-control-allow-origin": "*",

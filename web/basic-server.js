@@ -1,6 +1,6 @@
 var http = require("http");
 var handler = require("./request-handler");
-var url = require('url');
+var helpers = require('./http-helpers.js');
 
 var port = 8080;
 var ip = "127.0.0.1";
@@ -10,8 +10,8 @@ var routeMap = {
 }
 
 var server = http.createServer(function(request,reponse){
-  var parsedUrl = url.parse(request.url);
-  var path = parsedUrl.pathname;
+  var path = helpers.parseHelper(request).pathname;
+  console.log("path: " + path);
   if(routeMap[path]){
     routeMap[path](request,response);
   }
