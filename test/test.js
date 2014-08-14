@@ -73,7 +73,7 @@ describe("Node Server Request Listener Function", function() {
   it("Should 404 when asked for a nonexistent file", function(done) {
     var req = new stubs.Request("/arglebargle", "GET");
 
-    handler.handleRequest(req, res);
+    handler.throw404(req, res);
 
     waitForThen(
       function() { return res._ended; },

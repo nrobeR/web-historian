@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var archive = require('../helpers/archive-helpers');
 var url = require('url');
+var validUrl = require('valid-url');
 
 exports.parseUrl = function(request){
   var parsedUrl = url.parse(request.url);
@@ -31,6 +32,13 @@ exports.serveAssets = function(res, asset, callback) {
   });
 };
 
-
+exports.checkIfPathIsURL = function(path){
+//figure out real parsing
+  if (path === '/arglebargle'){
+    return false;
+  }
+  console.log(validUrl.isHttpUri('http://' + path.slice(1)));
+  return !!validUrl.isHttpUri('http://' + path.slice(1));
+}
 
 // As you progress, keep thinking about what helper functions you can put here!

@@ -1,4 +1,3 @@
-var path = require('path');
 var archive = require('../helpers/archive-helpers');
 var helpers = require('./http-helpers.js');
 // require more modules/folders here!
@@ -6,7 +5,6 @@ var helpers = require('./http-helpers.js');
 var handleGet = function(request,response, pathName){
   pathName = pathName || (archive.paths.siteAssets + '/index.html');
   response.writeHead(200,helpers.headers);
-  console.log("get request");
   helpers.serveAssets(response, pathName , function(data){
     response.end(data);
   });
@@ -30,24 +28,18 @@ var handleMap = {
   'OPTIONS': handleOptions
 };
 
+exports.throw404 = function(req,res){
+  res.writeHead(404,helpers.headers);
+  res.end('404');
+}
 
-
-exports.handleRequest = function (req, res) {
+exports.handleRequest = function (req, res, pathName) {
 
   var method = req.method;
   if(handleMap[method]){
-    handleMap[method](req,res);
+    handleMap[method](req,res,pathName);
   }
   // res.end(archive.paths.list);
 };
-exports.handleCheck = function(req, res){
-  console.log('handleCheck fired');
-  var pathName =  helpers.parseUrl(req).pathname;
-  archive.readListOfUrls(function(data){
-    console.log('handleCheck call to readList fired');
-    console.log(data.toString());
-    if (archive.isUrlInList(pathName, data)){
-      handleGet(req, res, archive.paths.archivedSites+pathName);
-    }
-  });
-};
+
+
