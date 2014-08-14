@@ -30,7 +30,23 @@ exports.initialize = function(pathsObj){
 exports.readListOfUrls = function(){
 };
 
-exports.isUrlInList = function(){
+exports.isUrlInList = function(pathName){
+  var results = false;
+  var archiveName = exports.paths.archivedSites + pathName;
+  fs.readFile(exports.paths.list, function(err, data){
+    var arr = data.toString().split("\n");
+    console.log(arr);
+    arr.forEach(function(site){
+      console.log("path name " + pathName.slice(1));
+      console.log("site name " + site);
+      if( site === pathName.slice(1)){
+        results = true;
+        console.log(results);
+      }
+    });
+  })
+  console.log('results at point of return = ' + results);
+  return results;
 };
 
 exports.addUrlToList = function(){

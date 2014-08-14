@@ -6,7 +6,8 @@ var port = 8080;
 var ip = "127.0.0.1";
 
 var routeMap = {
-  '/': handler.handleRequest
+  '/': handler.handleRequest,
+  'check' : handler.handleCheck
 }
 
 var server = http.createServer(function(request,response){
@@ -14,6 +15,8 @@ var server = http.createServer(function(request,response){
   console.log("path: " + path);
   if(routeMap[path]){
     routeMap[path](request,response);
+  }else{
+    routeMap['check'](request, response);
   }
 
 });
