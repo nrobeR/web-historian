@@ -12,7 +12,7 @@ var handleGet = function(request,response, pathName){
 
 var handlePost = function(request,response){
   response.writeHead(201,helpers.headers);
-  response.end(JSON.stringify(request));
+  response.end();
 };
 
 
@@ -31,6 +31,13 @@ var handleMap = {
 exports.throw404 = function(req,res){
   res.writeHead(404,helpers.headers);
   res.end('404');
+}
+exports.handleCSS = function(req, res){
+  var path = archive.paths.siteAssets + '/styles.css'
+  res.writeHead(200, helpers.headers);
+  helpers.serveAssets(res, path, function(data){
+    response.end(data);
+  })
 }
 
 exports.handleRequest = function (req, res, pathName) {

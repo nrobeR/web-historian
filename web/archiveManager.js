@@ -12,10 +12,15 @@ exports.handleCheck = function(req, res){
       handler.handleRequest(req, res, archive.paths.archivedSites+pathName);
     //Triggers Load, Calls to Fetch
     }else{
-
+      handler.handleRequest(req,res,archive.paths.siteAssets+'/loading.html');
+      archive.downloadUrls(pathName);
     }
 
   });
 
 
 };
+
+
+//get(url, pathofWherewewanttoSave, writetoList(target));
+

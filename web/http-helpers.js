@@ -22,7 +22,6 @@ exports.serveAssets = function(res, asset, callback) {
   // (Static files are things like html (yours or archived from others...), css, or anything that doesn't change often.)
   fs.readFile(asset, function(err, data){
     // console.log("fs fired");
-    console.log('read file:' + data);
     if(err){
       console.log(err);
     } else {
