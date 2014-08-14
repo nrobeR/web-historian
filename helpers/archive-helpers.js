@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
+var http_request = require('http-request');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -43,11 +44,20 @@ exports.isUrlInList = function(targetPath, listData){
   });
 };
 
-exports.addUrlToList = function(){
+exports.addUrlToList = function(target){
+  fs.appendFile(exports.paths.list, '\n' + target, function(err){
+    console.log('AddUrlToList fire');
+    if (err){console.log('Error in AddURLToList')}
+  });
 };
 
 exports.isURLArchived = function(){
 };
 
-exports.downloadUrls = function(){
+exports.downloadUrls = function(targetpath){
+  console.log('downloadUrls fire');
+  var filePath = exports.paths.archivedSites+targetpath;
+  http_request.get(targetpath.slice(1),filePath,function(data){
+    exports.addUrlToList(targetpath.slice(1));
+  });
 };
